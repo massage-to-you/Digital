@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b20">
+<title>Health Tech Pro | Advanced Wellness</title>
+<style>
+:root{--bg:#050b20;--panel:#101a33;--panel2:#142344;--blue:#078bff;--cyan:#16d9ff;--gold:#ffca28;--muted:#aebedc;--green:#22d39a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{background:var(--bg);color:#fff;font-family:Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:100;background:#080f29ed;backdrop-filter:blur(16px);border-bottom:1px solid #087fff88;box-shadow:0 8px 28px #0007;padding:12px 4%}
+.top{max-width:1400px;margin:auto;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;min-width:max-content}
+.logo{width:46px;height:46px;border:2px solid var(--cyan);border-radius:14px;display:grid;place-items:center;color:var(--cyan);font-size:23px;font-weight:bold;overflow:hidden;box-shadow:0 0 15px #078bff66}
+.logo img{width:100%;height:100%;object-fit:contain}
+.brand-name{font-weight:800;font-size:18px;letter-spacing:.2px}.brand-name span{color:var(--gold)}
+.tagline{font-size:10px;color:var(--muted)}
+.search{flex:1;display:flex;position:relative;max-width:720px;margin:auto}
+.search input{width:100%;height:52px;border:1px solid #2863b2;border-radius:30px;background:#101d3b;color:white;padding:0 125px 0 20px;font-size:15px;outline:none;transition:.25s}
+.search input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px #16d9ff20}
+.search-btn{position:absolute;right:5px;top:5px;height:42px;min-width:105px;border:0;border-radius:24px;background:linear-gradient(100deg,#087fff,#5941db);color:white;font-weight:bold;font-size:15px;box-shadow:0 5px 16px #087fff55}
+.search-clear{position:absolute;right:116px;top:14px;border:0;background:none;color:#c5d6f4;font-size:20px;display:none}
+.cart{border:1px solid #315b94;background:#101d3b;color:white;border-radius:14px;padding:10px 14px;font-size:23px;white-space:nowrap}
+#cartCount{font-size:13px;color:var(--gold);font-weight:bold}
+.mobile-search{display:none}
+.hero{min-height:370px;padding:65px 7%;display:flex;align-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 80% 40%,#0753b9aa,transparent 38%),radial-gradient(circle at 92% 90%,#5534a777,transparent 34%),linear-gradient(120deg,#06143a,#102c69,#21105b);border-bottom:1px solid #087fff}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #16d9ff33;border-radius:50%;width:360px;height:360px;right:5%;top:0;animation:orbit 18s linear infinite}
+.hero:after{width:250px;height:250px;right:9%;top:55px;animation-direction:reverse}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.hero-content{max-width:750px;position:relative;z-index:2}
+.eyebrow{display:inline-block;color:var(--cyan);border:1px solid #16d9ff66;background:#16d9ff12;border-radius:30px;padding:7px 14px;font-size:12px;letter-spacing:2px;font-weight:bold;margin-bottom:17px}
+.hero h1{font-size:clamp(38px,7vw,68px);line-height:1.04;font-style:italic;max-width:780px}
+.hero h1 span{color:var(--gold)}
+.hero p{color:#dceaff;margin:17px 0 24px;font-size:16px;max-width:560px}
+.primary-btn,.outline-btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:28px;padding:13px 25px;font-weight:bold;transition:.25s}
+.primary-btn{background:linear-gradient(90deg,#ffd34d,#ff9f00);color:#171717;box-shadow:0 7px 22px #ffb00044}
+.outline-btn{background:transparent;border:1px solid #5a8ac7;color:white;margin-left:8px}
+.primary-btn:hover,.outline-btn:hover{transform:translateY(-3px);filter:brightness(1.08)}
+.ticker{margin:18px 4%;padding:12px 0;border:1px solid #087fff88;border-radius:30px;overflow:hidden;white-space:nowrap;color:var(--gold);background:#0b1733;box-shadow:0 0 15px #087fff22}
+.ticker-track{display:inline-block;min-width:200%;animation:marquee 26s linear infinite;font-weight:bold;letter-spacing:.6px}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.section{max-width:1400px;margin:auto;padding:48px 4%;scroll-margin-top:90px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:22px}
+.kicker{color:var(--cyan);font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}
+.section-title{font-size:clamp(23px,4vw,32px);margin-top:4px}
+.section-sub{color:var(--muted);font-size:14px;margin-top:5px}
+.text-link{color:var(--cyan);font-size:13px;font-weight:bold}
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.category-card{min-height:112px;padding:20px;border-radius:17px;border:1px solid #23518b;background:linear-gradient(145deg,#172747,#0b142b);display:flex;align-items:center;gap:14px;transition:.3s;cursor:pointer}
+.category-card:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 10px 28px #087fff33}
+.category-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:15px;background:#087fff22;font-size:25px}
+.category-card strong{display:block}.category-card small{color:var(--muted)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.toolbar select{background:#101d3b;color:white;border:1px solid #2863b2;border-radius:11px;padding:12px 14px;min-width:165px}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.product{position:relative;min-width:0;padding:12px;border-radius:17px;border:1px solid #1b5798;background:linear-gradient(145deg,#172747,#0a1229);box-shadow:0 8px 25px #0003;opacity:0;transform:translateY(28px) scale(.94);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.product.show{opacity:1;transform:translateY(0) scale(1)}
+.product:hover{transform:translateY(-6px) scale(1.015);border-color:var(--cyan);box-shadow:0 14px 32px #087fff40}
+.product-image{height:180px;width:100%;object-fit:contain;background:#15274a;border-radius:12px;padding:8px}
+.product h3{font-size:15px;line-height:1.4;margin:12px 0 6px;min-height:42px}
+.product-id{font-size:11px;color:#8fa8ce}
+.price{margin:9px 0}.offer-price{font-size:21px;font-weight:800;color:var(--gold)}.real-price{font-size:12px;color:#9aabc8;text-decoration:line-through;margin-left:6px}
+.discount{display:inline-block;background:#123f70;color:var(--cyan);font-size:10px;padding:4px 7px;border-radius:5px;margin-top:3px}
+.product-info{border-top:1px solid #28456d;margin-top:10px;padding-top:8px;color:#c2d2eb;font-size:12px;line-height:1.8}
+.stock-available{color:#16d9a0}.stock-unavailable{color:#ff7777}
+.details,.add{width:100%;padding:11px 5px;border-radius:22px;margin-top:8px;font-weight:bold;transition:.2s}
+.details{color:white;background:transparent;border:1px solid #5374a9}.add{color:white;border:0;background:linear-gradient(90deg,#087fff,#5941db);box-shadow:0 5px 14px #087fff33}
+.add:disabled{opacity:.45;cursor:not-allowed}
+.details:hover,.add:hover{filter:brightness(1.15);transform:translateY(-2px)}
+.empty{display:none;text-align:center;padding:35px;color:var(--muted);border:1px dashed #315b94;border-radius:16px}
+.featured-wrap{background:linear-gradient(180deg,#07132d,#050b20)}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.benefit{padding:22px 17px;border:1px solid #234a7c;border-radius:16px;background:#101a33;text-align:center;transition:.3s}
+.benefit:hover{transform:translateY(-5px);border-color:var(--cyan)}
+.benefit-icon{font-size:30px;margin-bottom:10px}.benefit h3{font-size:16px;margin-bottom:5px}.benefit p{font-size:12px;color:var(--muted)}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.review{padding:22px;border:1px solid #234a7c;border-radius:16px;background:#101a33}
+.stars{color:var(--gold);letter-spacing:3px}.review p{color:#d2def1;font-size:14px;margin:12px 0}.review strong{font-size:13px}
+.faq-list{display:grid;gap:10px;max-width:900px}
+.faq-item{border:1px solid #244b7b;border-radius:13px;background:#101a33;overflow:hidden}
+.faq-item summary{cursor:pointer;padding:16px;font-weight:bold;list-style:none}
+.faq-item summary:after{content:"+";float:right;color:var(--cyan);font-size:20px}
+.faq-item[open] summary:after{content:"−"}
+.faq-item p{padding:0 16px 16px;color:var(--muted);font-size:14px}
+.contact-panel{padding:28px;border:1px solid #176dcb;border-radius:20px;background:radial-gradient(circle at 90%,#0753b955,transparent 40%),#101a33;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.contact-panel p{color:var(--muted);margin-top:6px}
+footer{background:#030817;border-top:1px solid #176dcb;padding:38px 4% 20px;color:#b8c4df}
+.footer-grid{max-width:1300px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
+footer h3,footer h4{color:white;margin-bottom:12px}footer p,footer a{font-size:13px;line-height:2;color:#aebedc}footer a:hover{color:var(--cyan)}
+.footer-bottom{max-width:1300px;margin:24px auto 0;padding-top:16px;border-top:1px solid #263a5b;text-align:center;font-size:12px}
+.whatsapp-float{position:fixed;right:18px;bottom:22px;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;z-index:150;background:#07182a;box-shadow:0 0 15px #25d36688}
+.whatsapp-float svg{width:32px;height:32px;fill:#25d366}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#0753b9,#087fff);border:1px solid var(--cyan);box-shadow:0 0 18px #078bff88;border-radius:25px;padding:12px 20px;display:none;z-index:200;color:white;font-size:14px;font-weight:bold;text-align:center;max-width:90%}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:950px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}.category-grid{grid-template-columns:repeat(2,1fr)}.benefits{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){header{padding:10px 12px}.top{gap:9px;flex-wrap:wrap}.brand{min-width:0;flex:1}.brand-name{font-size:15px}.tagline{font-size:9px}.logo{width:40px;height:40px}.search{order:3;flex-basis:100%;max-width:none}.search input{height:48px}.search-btn{height:38px;min-width:90px;font-size:14px}.search-clear{top:12px}.cart{padding:7px 10px;font-size:20px}.hero{min-height:330px;padding:48px 7%}.hero:before{right:-190px}.hero:after{right:-130px}.hero p{font-size:14px}.section{padding:35px 14px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.product{padding:9px;border-radius:14px}.product-image{height:135px}.product h3{font-size:13px;min-height:36px}.offer-price{font-size:18px}.product-info{font-size:11px}.details,.add{font-size:12px;padding:10px 4px}.category-grid{gap:9px}.category-card{padding:13px;min-height:90px;gap:9px}.category-icon{width:42px;height:42px;font-size:21px}.category-card strong{font-size:13px}.category-card small{font-size:10px}.review-grid{grid-template-columns:1fr}.benefits{gap:9px}.benefit{padding:17px 10px}.benefit h3{font-size:14px}.benefit p{font-size:11px}.contact-panel{display:block;padding:22px}.contact-panel .primary-btn{margin-top:15px}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header>
+ <div class="top">
+  <a class="brand" href="#" aria-label="Home">
+   <div class="logo" id="logo">H</div>
+   <div><div class="brand-name" id="brandName">HEALTH TECH <span>PRO</span></div><div class="tagline" id="tagline">ADVANCED WELLNESS</div></div>
+  </a>
+  <form class="search" id="searchForm">
+   <input id="searchInput" type="search" placeholder="Search products, category or product ID..." autocomplete="off">
+   <button class="search-clear" id="clearSearch" type="button" aria-label="Clear search">×</button>
+   <button class="search-btn" type="submit">⌕ Search</button>
+  </form>
+  <button class="cart" onclick="showCart()" aria-label="Open cart">🛒 <span id="cartCount">0</span></button>
+ </div>
+</header>
+
+<section class="hero" id="hero">
+ <div class="hero-content">
+  <div class="eyebrow" id="heroEyebrow">HEALTH • FITNESS • WELLNESS</div>
+  <h1 id="heroTitle">ADVANCED <span>WELLNESS</span></h1>
+  <p id="heroSubtitle">For A Healthier Tomorrow. Discover smart products selected to support your everyday wellness journey.</p>
+  <button class="primary-btn" onclick="goToProducts()" id="heroButton">Shop Now →</button>
+  <a class="outline-btn" href="#why-us">Why Choose Us</a>
+ </div>
+</section>
+
+<div class="ticker" id="announcement"><div class="ticker-track" id="tickerTrack">✦ SPECIAL OFFER! 20% OFF ON SELECTED PRODUCTS!　 ✦ FREE DELIVERY AVAILABLE!　 ✦ SHOP SMART, LIVE HEALTHY!　 ✦ SPECIAL OFFER! 20% OFF ON SELECTED PRODUCTS!　 ✦ FREE DELIVERY AVAILABLE!　 ✦ SHOP SMART, LIVE HEALTHY!　</div></div>
+
+<section class="section reveal" id="shop-by-category">
+ <div class="section-head"><div><div class="kicker">Explore collections</div><h2 class="section-title">Shop by Category</h2><p class="section-sub">Find what you need, faster.</p></div></div>
+ <div class="category-grid" id="categoryCards">
+  <button class="category-card" onclick="chooseCategory('Health Care')"><span class="category-icon">🩺</span><span><strong>Health Care</strong><small>Everyday care</small></span></button>
+  <button class="category-card" onclick="chooseCategory('Fitness')"><span class="category-icon">💪</span><span><strong>Fitness</strong><small>Move better</small></span></button>
+  <button class="category-card" onclick="chooseCategory('Beauty')"><span class="category-icon">✨</span><span><strong>Beauty</strong><small>Self-care picks</small></span></button>
+  <button class="category-card" onclick="chooseCategory('Wellness')"><span class="category-icon">🌿</span><span><strong>Wellness</strong><small>Feel your best</small></span></button>
+ </div>
+</section>
+
+<div class="featured-wrap">
+<section class="section reveal" id="featured-products">
+ <div class="section-head"><div><div class="kicker">Handpicked for you</div><h2 class="section-title">Featured Products</h2><p class="section-sub">Explore products from Health Tech Pro.</p></div><a class="text-link" href="#all-products">View all →</a></div>
+ <div class="products" id="featuredGrid"></div>
+</section>
+</div>
+
+<section class="section reveal" id="all-products">
+ <div class="section-head"><div><div class="kicker">Our catalogue</div><h2 class="section-title">All Products</h2><p class="section-sub">Browse, compare and choose your product.</p></div></div>
+ <div class="toolbar">
+  <select id="category"><option value="All">All Categories</option><option>Health Care</option><option>Fitness</option><option>Beauty</option><option>Wellness</option><option>Accessories</option><option>Combo Offer</option></select>
+  <select id="sort"><option value="featured">Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select>
+ </div>
+ <div class="products" id="productGrid"></div><div class="empty" id="empty">No products found. Try another search or category.</div>
+</section>
+
+<section class="section reveal" id="why-us">
+ <div class="section-head"><div><div class="kicker">The HTP difference</div><h2 class="section-title">Why Choose Health Tech Pro?</h2><p class="section-sub">A simple, convenient shopping experience.</p></div></div>
+ <div class="benefits">
+  <div class="benefit"><div class="benefit-icon">🛡️</div><h3>Quality Focus</h3><p>Carefully selected products for everyday use.</p></div>
+  <div class="benefit"><div class="benefit-icon">🚚</div><h3>Delivery Support</h3><p>Convenient delivery options across Bangladesh.</p></div>
+  <div class="benefit"><div class="benefit-icon">💬</div><h3>Customer Support</h3><p>Contact us when you need product or order help.</p></div>
+  <div class="benefit"><div class="benefit-icon">🔒</div><h3>Easy Ordering</h3><p>A straightforward checkout experience.</p></div>
+ </div>
+</section>
+
+<section class="section reveal" id="customer-reviews">
+ <div class="section-head"><div><div class="kicker">Customer feedback</div><h2 class="section-title">What Customers Say</h2><p class="section-sub">Customer experience matters to us.</p></div></div>
+ <div class="review-grid">
+  <article class="review"><div class="stars">★★★★★</div><p>“The ordering process was simple and the support was helpful.”</p><strong>Customer feedback</strong></article>
+  <article class="review"><div class="stars">★★★★★</div><p>“It was easy to find the product details and contact the store.”</p><strong>Customer feedback</strong></article>
+  <article class="review"><div class="stars">★★★★★</div><p>“A convenient way to browse wellness and fitness products.”</p><strong>Customer feedback</strong></article>
+ </div>
+</section>
+
+<section class="section reveal" id="faq">
+ <div class="section-head"><div><div class="kicker">Need help?</div><h2 class="section-title">Frequently Asked Questions</h2><p class="section-sub">Quick answers to common questions.</p></div></div>
+ <div class="faq-list">
+  <details class="faq-item"><summary>How can I place an order?</summary><p>Choose a product, add it to your cart and continue to the checkout page to submit your order.</p></details>
+  <details class="faq-item"><summary>How can I contact customer support?</summary><p>Use the WhatsApp contact button on this page to reach our support team.</p></details>
+  <details class="faq-item"><summary>Are product prices and stock updated?</summary><p>Product information shown on the website is subject to confirmation during order processing.</p></details>
+  <details class="faq-item"><summary>Where do you deliver?</summary><p>Delivery availability and charges are confirmed during checkout.</p></details>
+ </div>
+</section>
+
+<section class="section reveal" id="contact">
+ <div class="contact-panel"><div><div class="kicker">We're here to help</div><h2 class="section-title">Need Help Choosing a Product?</h2><p>Contact Health Tech Pro for product information and order support.</p></div><a class="primary-btn" id="contactButton" href="#footer">Contact Us →</a></div>
+</section>
+
+<footer id="footer">
+ <div class="footer-grid">
+  <div><h3 id="footerName">Health Tech Pro</h3><p id="footerDescription">Advanced wellness for a healthier tomorrow.</p><p id="footerAddress">Dhaka, Bangladesh</p></div>
+  <div><h4>Quick Links</h4><p><a href="#shop-by-category">Categories</a></p><p><a href="#all-products">All Products</a></p><p><a href="#faq">FAQ</a></p></div>
+  <div><h4>Customer Support</h4><p><a href="#contact">Contact Us</a></p><p><a href="#" id="privacyLink">Privacy Policy</a></p><p><a href="#" id="termsLink">Terms & Conditions</a></p></div>
+ </div>
+ <div class="footer-bottom">© <span id="year"></span> <span id="copyrightName">Health Tech Pro</span>. All rights reserved.</div>
+</footer>
+
+<a class="whatsapp-float" id="whatsappFloat" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+<svg viewBox="0 0 32 32"><path d="M16 .5A15.4 15.4 0 0 0 2.7 23.7L.5 31.5l8-2.1A15.5 15.5 0 1 0 16 .5zm0 28.2a12.6 12.6 0 0 1-6.4-1.7l-.5-.3-4.7 1.2 1.3-4.6-.3-.5A12.7 12.7 0 1 1 16 28.7zm7-9.5c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.7.1-.2.1-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.8c.2.2 2.6 4 6.3 5.6.9.4 1.6.6 2.1.7.9.3 1.8.2 2.4.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+</a>
+<div class="toast" id="toast"></div>
+
+<script>
+/* WEBSITE SETTINGS: update these values when connecting the admin dashboard */
+const CONFIG = {
+ websiteName:"Health Tech Pro",
+ highlightName:"PRO",
+ tagline:"ADVANCED WELLNESS",
+ logoText:"H",
+ logoImage:"",
+ whatsappNumber:"8801XXXXXXXXX",
+ heroEyebrow:"HEALTH • FITNESS • WELLNESS",
+ heroTitle:"ADVANCED <span>WELLNESS</span>",
+ heroSubtitle:"For A Healthier Tomorrow. Discover smart products selected to support your everyday wellness journey.",
+ heroButton:"Shop Now",
+ announcement:"✦ SPECIAL OFFER! 20% OFF ON SELECTED PRODUCTS!　 ✦ FREE DELIVERY AVAILABLE!　 ✦ SHOP SMART, LIVE HEALTHY!　",
+ footerDescription:"Advanced wellness for a healthier tomorrow.",
+ footerAddress:"Dhaka, Bangladesh"
+};
+
+const PRODUCT_DATA = [
+
+  {
+    id:"HTP001",
+    name:"Premium Whey Protein",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Whey+Protein",
+    offerPrice:3499,
+    realPrice:4499,
+    category:"Fitness",
+    stock:25,
+    description:"Premium quality product for your everyday fitness routine. Add complete product information here."
+  },
+
+  {
+    id:"HTP002",
+    name:"Wireless Earbuds",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Earbuds",
+    offerPrice:1999,
+    realPrice:2499,
+    category:"Accessories",
+    stock:18,
+    description:"Wireless earbuds with a compact and modern design."
+  },
+
+  {
+    id:"HTP003",
+    name:"Smart Fitness Watch",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Smart+Watch",
+    offerPrice:2499,
+    realPrice:3499,
+    category:"Fitness",
+    stock:20,
+    description:"A modern smart fitness watch for everyday lifestyle."
+  },
+
+  {
+    id:"HTP004",
+    name:"Massage Gun",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Massage+Gun",
+    offerPrice:2499,
+    realPrice:3299,
+    category:"Wellness",
+    stock:12,
+    description:"A convenient massage device for your wellness routine."
+  },
+
+  {
+    id:"HTP005",
+    name:"Digital Thermometer",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Thermometer",
+    offerPrice:399,
+    realPrice:550,
+    category:"Health Care",
+    stock:30,
+    description:"Digital thermometer with an easy-to-read display."
+  },
+
+  {
+    id:"HTP006",
+    name:"Electric Massager",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Massager",
+    offerPrice:1599,
+    realPrice:1999,
+    category:"Wellness",
+    stock:15,
+    description:"Compact electric massager for everyday personal care."
+  },
+{
+    id:"HTP007",
+    name:"Resistance Bands",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Resistance+Bands",
+    offerPrice:499,
+    realPrice:699,
+    category:"Fitness",
+    stock:40,
+    description:"Resistance bands for different fitness activities."
+  },
+
+  {
+    id:"HTP008",
+    name:"Water Bottle",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Water+Bottle",
+    offerPrice:350,
+    realPrice:500,
+    category:"Accessories",
+    stock:50,
+    description:"Reusable water bottle with a practical design."
+  },
+
+  {
+    id:"HTP009",
+    name:"Beauty Care Kit",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Beauty+Kit",
+    offerPrice:1299,
+    realPrice:1599,
+    category:"Beauty",
+    stock:20,
+    description:"A collection of selected everyday personal care products."
+  },
+
+  {
+    id:"HTP010",
+    name:"Smart Weighing Scale",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Weighing+Scale",
+    offerPrice:1499,
+    realPrice:1899,
+    category:"Health Care",
+    stock:14,
+    description:"Digital weighing scale with an easy-to-read display."
+  },
+
+  {
+    id:"HTP011",
+    name:"Yoga Mat",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Yoga+Mat",
+    offerPrice:899,
+    realPrice:1199,
+    category:"Fitness",
+    stock:22,
+    description:"Comfortable exercise mat for yoga and stretching."
+  },
+
+  {
+    id:"HTP012",
+    name:"Portable Blender",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Blender",
+    offerPrice:1799,
+    realPrice:2299,
+    category:"Wellness",
+    stock:16,
+    description:"Portable blender with a compact design."
+  },
+
+  {
+    id:"HTP013",
+    name:"Face Care Device",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Face+Care",
+    offerPrice:999,
+    realPrice:1399,
+    category:"Beauty",
+    stock:19,
+    description:"A compact personal beauty care device."
+  },
+
+  {
+    id:"HTP014",
+    name:"Fitness Gloves",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Fitness+Gloves",
+    offerPrice:450,
+    realPrice:650,
+    category:"Fitness",
+    stock:35,
+    description:"Comfortable gloves for general fitness activities."
+  },
+
+  {
+    id:"HTP015",
+    name:"Health Care Combo",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Health+Combo",
+    offerPrice:1999,
+    realPrice:2699,
+    category:"Combo Offer",
+    stock:10,
+    description:"A selected combination of everyday health care products."
+  },
+
+  {
+    id:"HTP016",
+    name:"Premium Wellness Kit",
+    image:"https://placehold.co/400x400/14274b/ffffff?text=Wellness+Kit",
+    offerPrice:2499,
+    realPrice:3199,
+    category:"Combo Offer",
+    stock:8,
+    description:"A premium combination of selected wellness products."
+  }
+
+];
+
+let products = [];
+let currentSearch = "";
+
+function loadProducts(){
+ try{
+  const saved = JSON.parse(localStorage.getItem("productDatabase") || "null");
+  products = Array.isArray(saved) && saved.length ? saved : PRODUCT_DATA;
+ }catch(e){products=PRODUCT_DATA;}
+ if(!localStorage.getItem("productDatabase")) localStorage.setItem("productDatabase",JSON.stringify(PRODUCT_DATA));
+}
+
+function applyConfig(){
+ document.title=CONFIG.websiteName;
+ document.getElementById("brandName").innerHTML=CONFIG.websiteName.replace(/(PRO)$/i,'<span>$1</span>');
+ document.getElementById("tagline").textContent=CONFIG.tagline;
+ document.getElementById("logo").innerHTML=CONFIG.logoImage?`<img src="${CONFIG.logoImage}" alt="Logo">`:CONFIG.logoText;
+ document.getElementById("heroEyebrow").textContent=CONFIG.heroEyebrow;
+ document.getElementById("heroTitle").innerHTML=CONFIG.heroTitle;
+ document.getElementById("heroSubtitle").textContent=CONFIG.heroSubtitle;
+ document.getElementById("heroButton").textContent=CONFIG.heroButton+" →";
+ document.getElementById("tickerTrack").textContent=CONFIG.announcement+CONFIG.announcement;
+ document.getElementById("footerName").textContent=CONFIG.websiteName;
+ document.getElementById("copyrightName").textContent=CONFIG.websiteName;
+ document.getElementById("footerDescription").textContent=CONFIG.footerDescription;
+ document.getElementById("footerAddress").textContent=CONFIG.footerAddress;
+ document.getElementById("year").textContent=new Date().getFullYear();
+ const wa=document.getElementById("whatsappFloat");
+ if(/^8801[3-9]\d{8}$/.test(CONFIG.whatsappNumber)){
+  wa.href="https://wa.me/"+CONFIG.whatsappNumber+"?text="+encodeURIComponent("Hello, I need assistance from "+CONFIG.websiteName);
+  document.getElementById("contactButton").href=wa.href;
+ }else{
+  wa.style.display="none";
+  document.getElementById("contactButton").href="#footer";
+ }
+}
+
+function money(v){return "৳"+Number(v||0).toLocaleString("en-BD")}
+function discount(p){const old=Number(p.realPrice||0),now=Number(p.offerPrice||0);return old>now?Math.round((old-now)/old*100):0}
+function safeText(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+
+function productCard(p,index){
+ const stock=Number(p.stock||0),off=discount(p);
+ return `<article class="product" data-id="${safeText(p.id)}">
+  <img class="product-image" src="${safeText(p.image||"")}" alt="${safeText(p.name)}" loading="lazy" onerror="this.style.opacity='.25'">
+  <div class="product-id">PRODUCT ID: ${safeText(p.id)}</div>
+  <h3>${safeText(p.name)}</h3>
+  <div class="price"><span class="offer-price">${money(p.offerPrice)}</span>${p.realPrice?`<span class="real-price">${money(p.realPrice)}</span>`:""}${off?`<br><span class="discount">${off}% OFF</span>`:""}</div>
+  <div class="product-info"><div>Category: <strong>${safeText(p.category||"General")}</strong></div><div>Stock: <strong class="${stock>0?"stock-available":"stock-unavailable"}">${stock>0?stock+" Available":"Out of stock"}</strong></div></div>
+  <button class="details" onclick="openProduct('${safeText(p.id)}')">View Details</button>
+  <button class="add" ${stock<=0?"disabled":""} onclick="addToCart('${safeText(p.id)}')">${stock>0?"Add to Cart +":"Out of Stock"}</button>
+ </article>`;
+}
+
+function revealCards(root){
+ const cards=[...root.querySelectorAll(".product")];
+ if(!("IntersectionObserver" in window)){cards.forEach(c=>c.classList.add("show"));return;}
+ const io=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   entry.target.classList.toggle("show", entry.isIntersecting);
+  });
+ },{threshold:.12,rootMargin:"0px 0px -25px 0px"});
+ cards.forEach((card,i)=>{card.style.transitionDelay=(i%8)*45+"ms";io.observe(card);});
+}
+
+function renderProducts(){
+ const category=document.getElementById("category").value;
+ const sort=document.getElementById("sort").value;
+ let list=products.filter(p=>{
+  const hay=[p.name,p.id,p.category,p.description].join(" ").toLowerCase();
+  return (!currentSearch||hay.includes(currentSearch))&&(category==="All"||p.category===category);
+ });
+ if(sort==="low")list.sort((a,b)=>Number(a.offerPrice)-Number(b.offerPrice));
+ if(sort==="high")list.sort((a,b)=>Number(b.offerPrice)-Number(a.offerPrice));
+ document.getElementById("productGrid").innerHTML=list.map(productCard).join("");
+ document.getElementById("empty").style.display=list.length?"none":"block";
+ revealCards(document.getElementById("productGrid"));
+}
+
+function renderFeatured(){
+ const list=products.slice(0,4);
+ document.getElementById("featuredGrid").innerHTML=list.map(productCard).join("");
+ revealCards(document.getElementById("featuredGrid"));
+}
+
+function searchProducts(value){
+ currentSearch=(value||"").trim().toLowerCase();
+ document.getElementById("clearSearch").style.display=currentSearch?"block":"none";
+ renderProducts();
+ document.getElementById("all-products").scrollIntoView({behavior:"smooth"});
+}
+document.getElementById("searchForm").addEventListener("submit",e=>{e.preventDefault();searchProducts(document.getElementById("searchInput").value)});
+document.getElementById("clearSearch").addEventListener("click",()=>{document.getElementById("searchInput").value="";currentSearch="";document.getElementById("clearSearch").style.display="none";renderProducts()});
+document.getElementById("category").addEventListener("change",renderProducts);
+document.getElementById("sort").addEventListener("change",renderProducts);
+
+function chooseCategory(category){
+ document.getElementById("category").value=category;
+ currentSearch="";
+ document.getElementById("searchInput").value="";
+ renderProducts();
+ document.getElementById("all-products").scrollIntoView({behavior:"smooth"});
+}
+function goToProducts(){document.getElementById("all-products").scrollIntoView({behavior:"smooth"})}
+function openProduct(id){
+ const p=products.find(x=>String(x.id)===String(id));
+ if(!p)return;
+ localStorage.setItem("selectedProduct",JSON.stringify(p));
+ localStorage.setItem("selectedProductId",String(id));
+ window.location.href="product.html?id="+encodeURIComponent(id);
+}
+function getCart(){try{return JSON.parse(localStorage.getItem("cartItems")||"[]")}catch(e){return []}}
+function saveCart(cart){localStorage.setItem("cartItems",JSON.stringify(cart));updateCartCount()}
+function addToCart(id){
+ const p=products.find(x=>String(x.id)===String(id));
+ if(!p)return;
+ let cart=getCart();
+ const found=cart.find(x=>String(x.id)===String(id));
+ if(found){found.quantity=Number(found.quantity||1)+1}
+ else{cart.push({...p,quantity:1})}
+ saveCart(cart);
+ showToast("Added to cart successfully!");
+}
+function updateCartCount(){
+ const count=getCart().reduce((sum,item)=>sum+Number(item.quantity||1),0);
+ document.getElementById("cartCount").textContent=count;
+}
+function showCart(){window.location.href="checkout.html"}
+function showToast(message){
+ const t=document.getElementById("toast");t.textContent=message;t.style.display="block";
+ clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",2300);
+}
+
+/* Scroll reveal for content sections */
+const sectionObserver=new IntersectionObserver(entries=>{
+ entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");sectionObserver.unobserve(e.target)}});
+},{threshold:.08});
+document.querySelectorAll(".reveal").forEach(el=>sectionObserver.observe(el));
+
+loadProducts();
+applyConfig();
+renderFeatured();
+renderProducts();
+updateCartCount();
+</script>
+</body>
+</html>

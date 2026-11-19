@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071126">
+<title>Order Confirmed | Health Tech Pro</title>
+<style>
+:root{--bg:#050b1b;--panel:#101d38;--line:rgba(148,180,230,.2);--text:#edf4ff;--muted:#9aaccb;--blue:#168cff;--cyan:#16d9ff;--gold:#ffc94a;--green:#31d69a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 15% 0%,#168cff25,transparent 32%),radial-gradient(circle at 90% 100%,#16d9ff16,transparent 30%),var(--bg);font-family:Inter,system-ui,Arial,sans-serif;color:var(--text)}
+.card{width:min(620px,100%);padding:clamp(22px,5vw,38px);border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,#142747,#09142b);box-shadow:0 20px 65px #0008;animation:rise .65s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.check{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#31d69a1a;border:1px solid #31d69a66;color:var(--green);font-size:34px;box-shadow:0 0 28px #31d69a30}
+h1{text-align:center;margin:0 0 8px;font-size:clamp(25px,5vw,34px)}.lead{text-align:center;color:var(--muted);line-height:1.6;margin:0 0 24px}
+.idbox{padding:14px;border:1px dashed #16d9ff66;background:#16d9ff0b;border-radius:14px;text-align:center;margin-bottom:18px}.idbox small{display:block;color:var(--muted);letter-spacing:1px;font-size:10px}.idbox strong{display:block;color:var(--gold);font-size:22px;margin-top:5px;overflow-wrap:anywhere}
+.details{display:grid;gap:10px}.line{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.line span{color:var(--muted)}.line strong{text-align:right;overflow-wrap:anywhere}.products{margin:17px 0;padding:14px;border-radius:13px;background:#071329;border:1px solid var(--line);font-size:13px;line-height:1.8}.products h2{font-size:13px;margin:0 0 8px;color:var(--cyan)}
+.note{margin:18px 0;color:var(--muted);font-size:12px;line-height:1.6;text-align:center}.home{display:block;text-align:center;padding:14px 18px;border-radius:12px;background:linear-gradient(100deg,var(--blue),#0870df);color:white;font-weight:850;text-decoration:none;box-shadow:0 8px 24px #168cff35;transition:.2s}.home:hover{transform:translateY(-2px);filter:brightness(1.08)}
+</style></head><body><main class="card"><div class="check">✓</div><h1>Order Submitted!</h1><p class="lead">Thank you for shopping with Health Tech Pro. Your order has been received.</p><div class="idbox"><small>YOUR ORDER ID</small><strong id="orderId">Loading...</strong></div><div class="details"><div class="line"><span>Order Status</span><strong id="status">Order Placed</strong></div><div class="line"><span>Payment Method</span><strong id="payment">—</strong></div><div class="line"><span>Payment Status</span><strong id="paymentStatus">—</strong></div><div class="line"><span>Delivery Address</span><strong id="address">—</strong></div><div class="line"><span>Total Amount</span><strong id="total">—</strong></div></div><div class="products"><h2>ORDER ITEMS</h2><div id="items">Order details will appear here if available on this device.</div></div><p class="note">For bKash/Nagad manual payments, your payment will remain pending until verified. You can contact customer support if you need help.</p><a class="home" href="index.html">← Back to Home Page</a></main>
+<script>
+const params=new URLSearchParams(location.search),wanted=params.get("orderId");let order=null;
+try{order=JSON.parse(localStorage.getItem("lastPlacedOrder")||"null")}catch(e){}
+if(order&&wanted&&order.orderId!==wanted)order=null;
+const money=n=>"৳ "+Number(n||0).toLocaleString("en-BD");
+document.getElementById("orderId").textContent=wanted||(order&&order.orderId)||"Not available";
+if(order){
+ document.getElementById("status").textContent=order.status||order.orderStatus||"Order Placed";
+ document.getElementById("payment").textContent=(order.paymentMethod||"—").toUpperCase();
+ document.getElementById("paymentStatus").textContent=order.paymentStatus==="pending_verification"?"Pending Verification":order.paymentStatus==="not_required"?"Cash on Delivery":"Pending";
+ const c=order.customerInfo||order.customer||{};
+ document.getElementById("address").textContent=[c.address||c.fullAddress,c.area,c.district].filter(Boolean).join(", ")||"Not provided";
+ document.getElementById("total").textContent=money(order.total);
+ const products=order.products||[];
+ document.getElementById("items").innerHTML=products.length?products.map(p=>`${String(p.productName||p.name||"Product").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))} × ${Number(p.quantity||p.qty||1)} — ${money(p.lineTotal??(Number(p.unitPrice||p.price||0)*Number(p.quantity||p.qty||1)))}`).join("<br>"):"Order items are saved in your account.";
+}
+</script></body></html>

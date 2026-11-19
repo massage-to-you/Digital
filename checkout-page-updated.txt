@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071126">
+<title>Checkout | Health Tech Pro</title>
+<style>
+:root{--bg:#050b1b;--panel:#0e1930;--panel2:#121f3b;--line:rgba(148,180,230,.16);--text:#edf4ff;--muted:#9aaccb;--blue:#168cff;--cyan:#16d9ff;--gold:#ffc94a;--green:#31d69a;--danger:#ff6c7d;--radius:20px;--shadow:0 18px 55px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% 0%,rgba(22,140,255,.12),transparent 28%),radial-gradient(circle at 90% 15%,rgba(22,217,255,.07),transparent 25%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.container{width:min(1160px,calc(100% - 32px));margin:auto}
+header{position:sticky;top:0;z-index:30;background:rgba(5,11,27,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#041225;font-weight:1000}.brand-name{font-size:17px;font-weight:900;letter-spacing:.5px}.brand-name span{color:var(--cyan)}.brand-tag{font-size:10px;letter-spacing:1.3px;color:var(--muted);margin-top:3px}.nav-right{display:flex;align-items:center;gap:10px}.cart-pill,.back-link{border:1px solid var(--line);background:var(--panel);padding:10px 14px;border-radius:13px;color:var(--text);font-size:13px;font-weight:750}.cart-pill b{color:var(--cyan)}
+.hero{padding:35px 0 20px;text-align:center}.eyebrow{display:inline-flex;padding:7px 12px;border:1px solid #16d9ff40;border-radius:99px;background:#16d9ff0d;color:var(--cyan);font-size:11px;font-weight:850;letter-spacing:1.4px;text-transform:uppercase}.hero h1{font-size:clamp(29px,5vw,46px);margin:14px 0 8px;letter-spacing:-1.3px}.hero p{margin:0;color:var(--muted);font-size:14px}
+.steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:23px auto 0}.step{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px;font-weight:800}.step i{font-style:normal;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#1a2a49;border:1px solid var(--line)}.step.active{color:var(--cyan)}.step.active i{background:var(--blue);color:white;border-color:var(--blue)}.step-line{width:28px;height:1px;background:var(--line);align-self:center}
+.announce-wrap{overflow:hidden;border:1px solid #ffc94a35;border-radius:13px;background:linear-gradient(90deg,#ffc94a16,#168cff12);margin:8px auto 25px}.announce{display:flex;width:max-content;white-space:nowrap;animation:marquee 22s linear infinite;padding:11px 0;color:var(--gold);font-size:12px;font-weight:850;letter-spacing:.5px}.announce span{padding:0 34px}@keyframes marquee{to{transform:translateX(-50%)}}
+.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.85fr);gap:22px;align-items:start;padding-bottom:55px}.left-col,.right-col{display:grid;gap:18px}.card{background:linear-gradient(145deg,rgba(18,31,59,.97),rgba(10,20,40,.98));border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);min-width:0}.card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.card-title{display:flex;align-items:center;gap:11px;margin:0;font-size:17px}.num{width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:#168cff20;color:var(--cyan);font-size:12px;font-weight:950}.mini-label{font-size:10px;color:var(--muted);letter-spacing:1px;font-weight:850;text-transform:uppercase}.muted{color:var(--muted)}.small{font-size:12px;line-height:1.6}
+.account-box{border:1px solid var(--line);background:#08142a;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}.account-status{display:flex;align-items:center;gap:10px;min-width:0}.status-dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}.account-email{font-size:13px;font-weight:750;overflow-wrap:anywhere}
+.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:850;transition:.25s;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.btn-primary{background:linear-gradient(110deg,var(--blue),#0870df);color:white;box-shadow:0 9px 22px #168cff35}.btn-ghost{background:#1b2b4b;color:var(--text);border:1px solid var(--line)}.btn-gold{background:linear-gradient(110deg,#ffd76c,#efa91c);color:#241600}.btn-danger{background:#ff6c7d18;color:#ff9aa5;border:1px solid #ff6c7d40}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#c4d2e9;font-weight:750}.required{color:var(--gold)}.field input,.field select,.field textarea,.coupon-input{width:100%;background:#071329;border:1px solid #263a5e;border-radius:11px;color:var(--text);padding:13px 14px;outline:none;transition:.2s;min-width:0}.field input:focus,.field select:focus,.field textarea:focus,.coupon-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #16d9ff17}.field input::placeholder,.field textarea::placeholder{color:#657b9f}.field select option{background:#0e1930}.field textarea{min-height:88px;resize:vertical}
+.product-list{display:grid;gap:12px}.product-row{display:grid;grid-template-columns:68px minmax(0,1fr) auto;gap:13px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:14px;background:#08142a}.product-row img{width:68px;height:68px;object-fit:cover;border-radius:11px;background:#172743}.product-name{font-size:13px;font-weight:850;line-height:1.4}.product-meta{font-size:11px;color:var(--muted);margin-top:4px}.product-price{font-size:13px;font-weight:900;color:var(--gold);white-space:nowrap}.qty{display:flex;align-items:center;gap:8px;margin-top:9px}.qty button{width:25px;height:25px;border:1px solid var(--line);border-radius:7px;background:#172847;color:white;font-weight:900}.qty span{font-size:12px;font-weight:850;min-width:14px;text-align:center}.remove{background:none;border:0;color:#ff8290;font-size:11px;padding:4px 0}.empty{text-align:center;padding:24px;border:1px dashed #395075;border-radius:14px;color:var(--muted)}
+.coupon-row{display:flex;gap:9px}.coupon-row .coupon-input{flex:1}.coupon-result{font-size:12px;margin-top:9px;min-height:18px}.payment-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.payment-option{border:1px solid var(--line);background:#08142a;border-radius:13px;padding:13px 9px;text-align:center;cursor:pointer;transition:.2s;position:relative}.payment-option.selected{border-color:var(--cyan);background:#16d9ff12;box-shadow:0 0 0 2px #16d9ff14}.payment-icon{width:35px;height:35px;border-radius:11px;margin:0 auto 8px;display:grid;place-items:center;background:#1a2d4d;font-size:17px;font-weight:950}.payment-option strong{font-size:12px;display:block}.payment-option small{font-size:10px;color:var(--muted);display:block;margin-top:4px}.discount-tag{display:inline-block;margin-top:7px;font-size:10px;color:var(--green);font-weight:850}
+.payment-panel{margin-top:14px;padding:16px;border:1px solid var(--line);background:#08142a;border-radius:14px}.payment-panel h4{margin:0 0 7px;font-size:14px}.payment-panel p{margin:0 0 13px;color:var(--muted);font-size:12px;line-height:1.6}.number-copy{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#111f3a;border:1px solid #2a4168;padding:11px 12px;border-radius:11px;margin-bottom:13px}.number-copy strong{font-size:15px;letter-spacing:.7px}.copy-btn{border:1px solid #16d9ff55;background:#16d9ff12;color:var(--cyan);padding:7px 10px;border-radius:8px;font-size:10px;font-weight:900}.cod-note{border:1px solid #ffc94a35;background:#ffc94a0c;padding:13px;border-radius:11px;color:#f5d58a;font-size:12px;line-height:1.6}
+.summary-lines{display:grid;gap:12px}.summary-line{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#c1cfe5}.summary-line strong{color:var(--text);white-space:nowrap}.summary-line.discount strong{color:var(--green)}.total-line{border-top:1px solid var(--line);padding-top:15px;margin-top:2px;align-items:center}.total-line span{font-weight:900;color:white}.total-line strong{font-size:24px;color:var(--gold)}
+.review-box{background:#08142a;border:1px solid var(--line);border-radius:13px;padding:14px;display:grid;gap:9px}.review-line{display:flex;justify-content:space-between;gap:12px;font-size:12px}.review-line span{color:var(--muted)}.review-line strong{text-align:right;overflow-wrap:anywhere}.checkline{display:flex;align-items:flex-start;gap:9px;font-size:11px;color:var(--muted);line-height:1.6;margin-top:13px}.checkline input{accent-color:var(--blue);margin-top:2px}.confirm-btn{width:100%;margin-top:16px;padding:16px;font-size:14px}
+.notice{border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.6;margin-top:12px;display:none}.notice.error{display:block;background:#ff6c7d12;border:1px solid #ff6c7d44;color:#ff9aa5}.notice.success{display:block;background:#31d69a12;border:1px solid #31d69a44;color:#7ce8bd}.trust{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;padding:0 0 32px;color:var(--muted);font-size:11px}.trust span{border:1px solid var(--line);background:#0b1730;padding:9px 12px;border-radius:99px}
+footer{border-top:1px solid var(--line);background:#040918;padding:28px 0;color:var(--muted);font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.footer-inner strong{color:var(--text)}.mobile-total{display:none}.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.right-col{order:-1}.sticky-summary{position:static}.summary-card{display:none}.mobile-total{display:flex;position:fixed;z-index:25;bottom:0;left:0;right:0;background:rgba(5,11,27,.96);backdrop-filter:blur(15px);border-top:1px solid var(--line);padding:11px 16px;align-items:center;justify-content:space-between;gap:12px}.mobile-total small{display:block;color:var(--muted);font-size:10px}.mobile-total strong{font-size:19px;color:var(--gold)}.mobile-total .btn{padding:12px 15px}.layout{padding-bottom:100px}}
+@media(max-width:560px){.container{width:min(100% - 22px,1160px)}.nav{min-height:66px}.logo{width:37px;height:37px}.brand-name{font-size:14px}.brand-tag{font-size:8px}.back-link{padding:9px 10px;font-size:11px}.cart-pill{padding:9px 10px;font-size:11px}.hero{padding:27px 0 16px}.card{padding:16px;border-radius:16px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.payment-options{gap:7px}.payment-option{padding:11px 5px}.payment-option strong{font-size:11px}.product-row{grid-template-columns:56px minmax(0,1fr) auto;gap:9px;padding:9px}.product-row img{width:56px;height:56px}.product-price{font-size:12px}.step{font-size:10px}.step-line{width:13px}.account-box{align-items:flex-start;flex-direction:column}.coupon-row{flex-direction:column}.coupon-row .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="index.html"><div class="logo" id="logoText">HT</div><div><div class="brand-name" id="brandName">HEALTH <span>TECH PRO</span></div><div class="brand-tag" id="brandTag">ADVANCED WELLNESS • BETTER LIFE</div></div></a>
+  <div class="nav-right"><a class="back-link" href="index.html">← Back to Shopping</a><a class="cart-pill" href="#orderSummary">🛒 <b id="cartCount">0</b></a></div>
+</div></header>
+<main class="container">
+<section class="hero reveal"><span class="eyebrow">✦ Secure & Simple Checkout</span><h1 id="checkoutTitle">Complete Your Order</h1><p id="checkoutSubtitle">Review your items, choose payment and enter delivery information.</p>
+<div class="steps"><div class="step active"><i>1</i> Cart</div><div class="step-line"></div><div class="step active"><i>2</i> Payment</div><div class="step-line"></div><div class="step active"><i>3</i> Delivery</div><div class="step-line"></div><div class="step"><i>4</i> Confirm</div></div></section>
+<div class="announce-wrap" id="announcementWrap"><div class="announce" id="paymentAnnouncement"><span>✦ Pay with bKash or Nagad and enjoy the available online payment discount!</span><span>✦ Pay with bKash or Nagad and enjoy the available online payment discount!</span></div></div>
+
+<div class="layout">
+<div class="left-col">
+<section class="card reveal" id="accountCard"><div class="card-head"><h2 class="card-title"><span class="num">01</span> Account Verification</h2><span class="mini-label">Account</span></div>
+<div class="account-box"><div class="account-status"><span class="status-dot" id="accountDot"></span><div><div class="account-email" id="accountText">Checking your account...</div><div class="small muted" id="accountSub">Please wait while we verify your login.</div></div></div><button class="btn btn-ghost" id="logoutBtn" type="button" hidden>Log Out</button></div><div class="notice" id="loginNotice"></div>
+</section>
+
+<section class="card reveal" id="itemsCard"><div class="card-head"><h2 class="card-title"><span class="num">02</span> Your Order</h2><span class="mini-label" id="itemsCountLabel">0 ITEMS</span></div><div class="product-list" id="productList"><div class="empty">Loading your cart...</div></div><div class="notice" id="cartNotice"></div></section>
+
+<section class="card reveal" id="couponCard"><div class="card-head"><h2 class="card-title"><span class="num">03</span> Coupon Code</h2><span class="mini-label">Optional</span></div>
+<div class="coupon-row"><input class="coupon-input" id="couponInput" placeholder="Enter coupon code" autocomplete="off"><button class="btn btn-primary" id="applyCoupon" type="button">Apply Coupon</button></div><div class="coupon-result muted" id="couponResult">Have a coupon? Apply it before placing your order.</div>
+</section>
+
+<section class="card reveal" id="paymentCard"><div class="card-head"><h2 class="card-title"><span class="num">04</span> Payment Method</h2><span class="mini-label">Choose one</span></div>
+<div class="payment-options" id="paymentOptions">
+<label class="payment-option selected" data-method="bkash"><input type="radio" name="payment" value="bkash" checked><span class="payment-icon">b</span><strong>bKash</strong><small>Manual Payment</small><span class="discount-tag" id="bkashDiscountTag">Online discount</span></label>
+<label class="payment-option" data-method="nagad"><input type="radio" name="payment" value="nagad"><span class="payment-icon">N</span><strong>Nagad</strong><small>Manual Payment</small><span class="discount-tag" id="nagadDiscountTag">Online discount</span></label>
+<label class="payment-option" data-method="cod"><input type="radio" name="payment" value="cod"><span class="payment-icon">৳</span><strong>Cash on Delivery</strong><small>Pay on arrival</small><span class="discount-tag" id="codDiscountTag" style="color:var(--muted)">No online discount</span></label>
+</div>
+<div class="payment-panel" id="manualPanel"><h4 id="manualTitle">Pay with bKash</h4><p id="manualInstructions">Send Money to the number below. Then enter the number you paid from and your Transaction ID.</p>
+<div class="number-copy"><div><div class="mini-label">Payment Number</div><strong id="paymentNumber">01XXXXXXXXX</strong></div><button class="copy-btn" id="copyNumber" type="button">COPY</button></div>
+<div class="summary-line" style="margin-bottom:13px"><span>Amount to Pay</span><strong id="manualPayAmount">৳0</strong></div>
+<div class="form-grid"><div class="field"><label for="senderNumber">Your <span id="senderProvider">bKash</span> Number <span class="required">*</span></label><input id="senderNumber" type="tel" placeholder="01XXXXXXXXX" inputmode="numeric"></div><div class="field"><label for="transactionId">Transaction ID (TrxID) <span class="required">*</span></label><input id="transactionId" type="text" placeholder="Enter transaction ID"></div></div>
+</div>
+<div class="payment-panel" id="codPanel" hidden><h4>Cash on Delivery</h4><p>Pay the delivery person when your parcel arrives.</p><div class="cod-note">Your online payment discount will not apply to Cash on Delivery orders. Pay the displayed total when you receive the parcel.</div></div>
+<div class="notice" id="paymentNotice"></div>
+</section>
+
+<section class="card reveal" id="deliveryCard"><div class="card-head"><h2 class="card-title"><span class="num">05</span> Delivery Information</h2><span class="mini-label">Required details</span></div>
+<div class="form-grid">
+<div class="field"><label for="fullName">Full Name <span class="required">*</span></label><input id="fullName" type="text" placeholder="Enter your full name" autocomplete="name"></div>
+<div class="field"><label for="mobile">Mobile Number <span class="required">*</span></label><input id="mobile" type="tel" placeholder="01XXXXXXXXX" inputmode="numeric" autocomplete="tel"></div>
+<div class="field"><label for="alternative">Alternative Number</label><input id="alternative" type="tel" placeholder="Optional number" inputmode="numeric"></div>
+<div class="field"><label for="district">District <span class="required">*</span></label><input id="district" type="text" placeholder="Enter district"></div>
+<div class="field"><label for="area">Area / Thana <span class="required">*</span></label><input id="area" type="text" placeholder="Enter area or thana"></div>
+<div class="field full"><label for="address">Full Delivery Address <span class="required">*</span></label><textarea id="address" placeholder="House, road, village, landmark and complete address"></textarea></div>
+<div class="field full"><label for="deliveryNote">Delivery Instructions (Optional)</label><textarea id="deliveryNote" placeholder="Any extra delivery instructions"></textarea></div>
+</div></section>
+</div>
+
+<aside class="right-col">
+<section class="card sticky-summary reveal" id="orderSummary"><div class="card-head"><h2 class="card-title"><span class="num">06</span> Order Summary</h2><span class="mini-label">Live total</span></div>
+<div class="summary-lines">
+<div class="summary-line"><span>Subtotal</span><strong id="subtotal">৳0</strong></div>
+<div class="summary-line discount"><span>Coupon Discount</span><strong id="couponDiscount">−৳0</strong></div>
+<div class="summary-line discount"><span>Payment Discount</span><strong id="paymentDiscount">−৳0</strong></div>
+<div class="summary-line"><span>Delivery Charge</span><strong id="deliveryCharge">৳120</strong></div>
+<div class="summary-line total-line"><span>Total Payable</span><strong id="grandTotal">৳120</strong></div>
+</div><p class="small muted" id="deliveryNoteText" style="margin:14px 0 0">Delivery charge is calculated using the current checkout settings.</p>
+<div class="review-box" style="margin-top:17px"><div class="mini-label">Final Review</div><div class="review-line"><span>Payment</span><strong id="reviewPayment">bKash</strong></div><div class="review-line"><span>Customer</span><strong id="reviewCustomer">Not entered</strong></div><div class="review-line"><span>Mobile</span><strong id="reviewMobile">Not entered</strong></div><div class="review-line"><span>Delivery Area</span><strong id="reviewAddress">Not entered</strong></div></div>
+<label class="checkline"><input type="checkbox" id="terms"><span>I confirm that the information above is correct and agree to the store's order and delivery terms.</span></label>
+<button class="btn btn-primary confirm-btn" id="confirmOrder" type="button">CONFIRM ORDER →</button>
+<div class="notice" id="orderNotice"></div>
+<p class="small muted" style="margin:13px 0 0;text-align:center">Your order details will be saved for order processing. Keep your Order ID for future reference.</p>
+</section>
+</aside>
+</div>
+<div class="trust"><span>🔒 Secure Checkout</span><span>📦 Order Tracking Ready</span><span>💬 Customer Support</span></div>
+</main>
+<div class="mobile-total"><div><small>Total Payable</small><strong id="mobileGrandTotal">৳0</strong></div><button class="btn btn-primary" id="mobileConfirm" type="button">Confirm Order →</button></div>
+<footer><div class="container footer-inner"><div><strong id="footerBrand">HEALTH TECH PRO</strong><div style="margin-top:5px">Advanced Wellness | Better Life</div><div>Dhaka, Bangladesh</div></div><div>Customer Support · Privacy Policy · Terms & Conditions<br><span style="display:inline-block;margin-top:6px">© <span id="year"></span> All Rights Reserved.</span></div></div></footer>
+
+<script>
+/* ==========================================================
+   HEALTH TECH PRO CHECKOUT
+   File: checkout.html
+   IMPORTANT:
+   1) Current page reads cartItems / productDatabase from localStorage.
+   2) For permanent cross-device orders, connect this page to your
+      existing Firebase project and secure Firestore rules.
+   3) Admin settings can be supplied through localStorage keys below
+      until the Firebase settings integration is connected.
+========================================================== */
+
+const DEFAULT_SETTINGS = {
+  brandName:"HEALTH TECH PRO", brandTag:"ADVANCED WELLNESS • BETTER LIFE", logoText:"HT",
+  checkoutTitle:"Complete Your Order", checkoutSubtitle:"Review your items, choose payment and enter delivery information.",
+  announcement:"Pay with bKash or Nagad and enjoy the available online payment discount!",
+  announcementEnabled:true, announcementSpeed:22,
+  deliveryCharge:120, freeDeliveryMinimum:0,
+  paymentDiscountEnabled:true, paymentDiscountPercent:5, paymentDiscountMax:0,
+  couponEnabled:true, coupons:[
+    /* Example coupon: {code:"WELCOME10",type:"percent",value:10,minOrder:500,maxDiscount:200,enabled:true} */
+  ],
+  payments:{
+    bkash:{enabled:true,number:"01XXXXXXXXX",instructions:"Send Money to the number below. Then enter the number you paid from and your Transaction ID."},
+    nagad:{enabled:true,number:"01XXXXXXXXX",instructions:"Send Money to the number below. Then enter the number you paid from and your Transaction ID."},
+    cod:{enabled:true},
+    instant:{enabled:false}
+  },
+  fields:{alternativeNumber:true,deliveryNote:true},
+  footerBrand:"HEALTH TECH PRO"
+};
+
+let settings = loadSettings();
+let cart = loadCart();
+let selectedPayment = "bkash";
+let appliedCoupon = null;
+let couponDiscountValue = 0;
+let paymentDiscountValue = 0;
+let currentUser = null;
+
+function loadSettings(){
+  let s={};
+  try{s=JSON.parse(localStorage.getItem("checkoutSettings")||"{}")}catch(e){}
+  return deepMerge(DEFAULT_SETTINGS,s);
+}
+function deepMerge(base,extra){
+  const out={...base};
+  for(const k in extra){
+    if(extra[k] && typeof extra[k]==="object" && !Array.isArray(extra[k]) && base[k] && typeof base[k]==="object" && !Array.isArray(base[k])) out[k]=deepMerge(base[k],extra[k]);
+    else out[k]=extra[k];
+  }
+  return out;
+}
+function loadCart(){
+  let data=[];
+  try{data=JSON.parse(localStorage.getItem("cartItems")||"[]")}catch(e){}
+  if(!Array.isArray(data)) return [];
+  return data.map((p,i)=>({
+    id:String(p.id||p.productId||p.productID||("ITEM"+i)),
+    name:p.name||p.title||"Product",
+    image:p.image||p.img||p.imageUrl||"",
+    price:Number(p.offerPrice??p.price??p.salePrice??p.realPrice??0)||0,
+    quantity:Math.max(1,Number(p.quantity??p.qty??1)||1)
+  }));
+}
+function saveCart(){localStorage.setItem("cartItems",JSON.stringify(cart));}
+function money(n){return "৳"+Math.max(0,Math.round(Number(n)||0)).toLocaleString("en-US")}
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function subtotal(){return cart.reduce((s,p)=>s+p.price*p.quantity,0)}
+function deliveryFee(){if(settings.freeDeliveryMinimum>0&&subtotal()>=settings.freeDeliveryMinimum)return 0;return Math.max(0,Number(settings.deliveryCharge)||0)}
+function getPaymentDiscount(){
+  if(selectedPayment==="cod"||!settings.paymentDiscountEnabled)return 0;
+  let d=subtotal()*Math.max(0,Number(settings.paymentDiscountPercent)||0)/100;
+  if(Number(settings.paymentDiscountMax)>0)d=Math.min(d,Number(settings.paymentDiscountMax));
+  return Math.round(d);
+}
+function grandTotal(){return Math.max(0,subtotal()-couponDiscountValue-getPaymentDiscount()+deliveryFee())}
+function showNotice(id,msg,type="error"){const el=document.getElementById(id);el.className="notice "+type;el.textContent=msg;}
+function clearNotice(id){const el=document.getElementById(id);el.className="notice";el.textContent="";}
+function renderCart(){
+  const list=document.getElementById("productList");
+  document.getElementById("cartCount").textContent=cart.reduce((s,p)=>s+p.quantity,0);
+  document.getElementById("itemsCountLabel").textContent=cart.length+" ITEMS";
+  if(!cart.length){list.innerHTML='<div class="empty">Your cart is empty.<br><a href="index.html" style="color:var(--cyan);display:inline-block;margin-top:9px">Continue Shopping →</a></div>';document.getElementById("confirmOrder").disabled=true;}
+  else{
+    document.getElementById("confirmOrder").disabled=false;
+    list.innerHTML=cart.map((p,i)=>`<div class="product-row">
+      <img src="${escapeHTML(p.image||"")}" alt="${escapeHTML(p.name)}" onerror="this.style.visibility='hidden'">
+      <div><div class="product-name">${escapeHTML(p.name)}</div><div class="product-meta">ID: ${escapeHTML(p.id)} · ${money(p.price)} each</div>
+      <div class="qty"><button type="button" onclick="changeQty(${i},-1)" aria-label="Decrease quantity">−</button><span>${p.quantity}</span><button type="button" onclick="changeQty(${i},1)" aria-label="Increase quantity">+</button><button class="remove" type="button" onclick="removeItem(${i})">Remove</button></div></div>
+      <div class="product-price">${money(p.price*p.quantity)}</div></div>`).join("");
+  }
+  renderTotals();
+}
+function changeQty(i,delta){if(!cart[i])return;cart[i].quantity=Math.max(1,cart[i].quantity+delta);saveCart();renderCart();}
+function removeItem(i){cart.splice(i,1);saveCart();appliedCoupon=null;couponDiscountValue=0;renderCart();document.getElementById("couponResult").textContent="Cart updated. Apply coupon again if needed.";}
+function renderTotals(){
+  paymentDiscountValue=getPaymentDiscount();
+  document.getElementById("subtotal").textContent=money(subtotal());
+  document.getElementById("couponDiscount").textContent="−"+money(couponDiscountValue);
+  document.getElementById("paymentDiscount").textContent="−"+money(paymentDiscountValue);
+  document.getElementById("deliveryCharge").textContent=money(deliveryFee());
+  document.getElementById("grandTotal").textContent=money(grandTotal());
+  document.getElementById("manualPayAmount").textContent=money(grandTotal());
+  document.getElementById("mobileGrandTotal").textContent=money(grandTotal());
+  document.getElementById("reviewPayment").textContent=selectedPayment==="cod"?"Cash on Delivery":selectedPayment==="nagad"?"Nagad":"bKash";
+  document.getElementById("reviewCustomer").textContent=document.getElementById("fullName").value||"Not entered";
+  document.getElementById("reviewMobile").textContent=document.getElementById("mobile").value||"Not entered";
+  document.getElementById("reviewAddress").textContent=[document.getElementById("area").value,document.getElementById("district").value].filter(Boolean).join(", ")||"Not entered";
+}
+function renderPayment(){
+  document.querySelectorAll(".payment-option").forEach(el=>el.classList.toggle("selected",el.dataset.method===selectedPayment));
+  const manual=selectedPayment!=="cod";
+  document.getElementById("manualPanel").hidden=!manual;
+  document.getElementById("codPanel").hidden=manual;
+  if(manual){
+    const provider=selectedPayment==="bkash"?"bKash":"Nagad",cfg=settings.payments[selectedPayment]||{};
+    document.getElementById("manualTitle").textContent="Pay with "+provider;
+    document.getElementById("manualInstructions").textContent=cfg.instructions||"Send Money to the number below. Then enter your payment details.";
+    document.getElementById("paymentNumber").textContent=cfg.number||"Number not configured";
+    document.getElementById("senderProvider").textContent=provider;
+    document.getElementById("senderNumber").placeholder="Your "+provider+" number";
+    document.getElementById("senderNumber").value="";
+    document.getElementById("transactionId").value="";
+  }
+  document.getElementById("bkashDiscountTag").textContent=settings.paymentDiscountEnabled?Number(settings.paymentDiscountPercent)+"% online discount":"";
+  document.getElementById("nagadDiscountTag").textContent=settings.paymentDiscountEnabled?Number(settings.paymentDiscountPercent)+"% online discount":"";
+  document.getElementById("codDiscountTag").textContent="No online discount";
+  renderTotals();
+}
+function selectPayment(method){
+  if(method==="bkash"&&!settings.payments.bkash.enabled)return;
+  if(method==="nagad"&&!settings.payments.nagad.enabled)return;
+  if(method==="cod"&&!settings.payments.cod.enabled)return;
+  selectedPayment=method;renderPayment();
+}
+function applyCoupon(){
+  clearNotice("orderNotice");
+  if(!settings.couponEnabled){document.getElementById("couponResult").textContent="Coupon codes are currently unavailable.";return;}
+  const code=document.getElementById("couponInput").value.trim().toUpperCase();
+  if(!code){document.getElementById("couponResult").textContent="Please enter a coupon code.";return;}
+  const coupon=(settings.coupons||[]).find(c=>String(c.code||"").toUpperCase()===code&&c.enabled!==false);
+  if(!coupon){appliedCoupon=null;couponDiscountValue=0;document.getElementById("couponResult").textContent="Invalid or inactive coupon code.";renderTotals();return;}
+  if(subtotal()<Number(coupon.minOrder||0)){document.getElementById("couponResult").textContent="Minimum order amount is "+money(coupon.minOrder)+".";return;}
+  let discount=coupon.type==="fixed"?Number(coupon.value)||0:subtotal()*(Number(coupon.value)||0)/100;
+  if(Number(coupon.maxDiscount)>0)discount=Math.min(discount,Number(coupon.maxDiscount));
+  couponDiscountValue=Math.min(Math.round(discount),subtotal());appliedCoupon={code,type:coupon.type,value:coupon.value};
+  document.getElementById("couponResult").textContent="Coupon "+code+" applied. You save "+money(couponDiscountValue)+".";
+  document.getElementById("couponResult").style.color="var(--green)";renderTotals();
+}
+function setupAccount(){
+  /* Existing Firebase Auth can be connected here.
+     If your login page initializes Firebase globally, expose auth as window.auth.
+     This page does not force a new login page. */
+  if(window.auth&&typeof window.auth.onAuthStateChanged==="function"){
+    window.auth.onAuthStateChanged(user=>{
+      currentUser=user||null;
+      if(user){document.getElementById("accountText").textContent=user.email||"Signed-in account";document.getElementById("accountSub").textContent="Your order will be linked to this account.";document.getElementById("accountDot").style.background="var(--green)";document.getElementById("logoutBtn").hidden=false;}
+      else{document.getElementById("accountText").textContent="You are not logged in";document.getElementById("accountSub").textContent="Please log in before placing an order.";document.getElementById("accountDot").style.background="var(--danger)";document.getElementById("loginNotice").className="notice error";document.getElementById("loginNotice").textContent="You must be logged in to place an order. Login page will be connected separately.";}
+    });
+  }else{
+    document.getElementById("accountText").textContent="Firebase account check not connected";
+    document.getElementById("accountSub").textContent="Connect your existing Firebase Auth to enable account verification.";
+  }
+}
+async function placeOrder(){
+  clearNotice("orderNotice");
+  if(!cart.length){showNotice("orderNotice","Your cart is empty. Add products before placing an order.");return;}
+  if(!currentUser){showNotice("orderNotice","You must be logged in to place an order. Firebase Authentication connection is required.");return;}
+  const name=document.getElementById("fullName").value.trim(),mobile=document.getElementById("mobile").value.trim(),district=document.getElementById("district").value.trim(),area=document.getElementById("area").value.trim(),address=document.getElementById("address").value.trim();
+  if(!name||!mobile||!district||!area||!address){showNotice("orderNotice","Please complete all required delivery information.");document.getElementById("deliveryCard").scrollIntoView({behavior:"smooth"});return;}
+  if(!/^01[3-9]\d{8}$/.test(mobile.replace(/\s|-/g,""))){showNotice("orderNotice","Enter a valid Bangladesh mobile number (11 digits, starting with 01).");return;}
+  if(selectedPayment!=="cod"){
+    const sender=document.getElementById("senderNumber").value.trim(),trx=document.getElementById("transactionId").value.trim();
+    if(!sender||!trx){showNotice("orderNotice","Enter the payment sender number and Transaction ID.");return;}
+    if(!/^01[3-9]\d{8}$/.test(sender.replace(/\s|-/g,""))){showNotice("orderNotice","Enter a valid sender mobile number.");return;}
+  }
+  if(!document.getElementById("terms").checked){showNotice("orderNotice","Please confirm the information and accept the order terms.");return;}
+  const orderId="HTP-"+Date.now().toString().slice(-9);
+  const order={
+    orderId,uid:currentUser.uid,email:currentUser.email||"",createdAt:new Date().toISOString(),
+    customerInfo:{name,mobile,alternativeNumber:document.getElementById("alternative").value.trim(),district,area,address,deliveryNote:document.getElementById("deliveryNote").value.trim()},
+    products:cart.map(p=>({...p})),paymentMethod:selectedPayment,
+    paymentInfo:selectedPayment==="cod"?{type:"cash_on_delivery"}:{provider:selectedPayment,senderNumber:document.getElementById("senderNumber").value.trim(),transactionId:document.getElementById("transactionId").value.trim()},
+    subtotal:subtotal(),coupon:appliedCoupon,couponDiscount:couponDiscountValue,paymentDiscount:paymentDiscountValue,
+    deliveryCharge:deliveryFee(),total:grandTotal(),
+    paymentStatus:selectedPayment==="cod"?"not_required":"pending_verification",
+    orderStatus:"pending",status:"Order Placed"
+  };
+  const btn=document.getElementById("confirmOrder");btn.disabled=true;btn.textContent="SAVING ORDER...";
+  try{
+    /* Firebase integration contract:
+       If Firestore is initialized, expose window.db and window.addDoc,
+       window.collection. Recommended: use your existing Firebase SDK setup.
+       Firestore target: orders collection. Security Rules must validate UID
+       and prevent customers from changing admin-only status/payment fields. */
+    if(window.db&&window.addDoc&&window.collection){
+      const ref=await window.addDoc(window.collection(window.db,"orders"),order);
+      order.documentId=ref.id;
+    }else{
+      /* Temporary local fallback is only on this device/browser.
+         It is NOT a permanent or cross-device order database. */
+      const saved=JSON.parse(localStorage.getItem("localOrders")||"[]");
+      saved.unshift(order);localStorage.setItem("localOrders",JSON.stringify(saved));
+    }
+    localStorage.setItem("lastPlacedOrder",JSON.stringify(order));
+    localStorage.removeItem("cartItems");
+    window.location.href="order-success.html?orderId="+encodeURIComponent(order.orderId);
+  }catch(err){
+    console.error(err);showNotice("orderNotice","Order could not be saved. Please try again or contact support.");
+    btn.disabled=false;btn.textContent="CONFIRM ORDER →";
+  }
+}
+function applySettings(){
+  document.getElementById("brandName").innerHTML=escapeHTML(settings.brandName).replace("TECH PRO","<span>TECH PRO</span>");
+  document.getElementById("brandTag").textContent=settings.brandTag;
+  document.getElementById("logoText").textContent=settings.logoText;
+  document.getElementById("footerBrand").textContent=settings.footerBrand||settings.brandName;
+  document.getElementById("checkoutTitle").textContent=settings.checkoutTitle;
+  document.getElementById("checkoutSubtitle").textContent=settings.checkoutSubtitle;
+  document.getElementById("announcementWrap").hidden=!settings.announcementEnabled;
+  const announcement=escapeHTML(settings.announcement);
+  document.getElementById("paymentAnnouncement").innerHTML=`<span>✦ ${announcement}</span><span>✦ ${announcement}</span>`;
+  document.getElementById("paymentAnnouncement").style.animationDuration=Math.max(8,Number(settings.announcementSpeed)||22)+"s";
+  document.getElementById("deliveryCharge").textContent=money(settings.deliveryCharge);
+  document.getElementById("alternative").parentElement.hidden=settings.fields.alternativeNumber===false;
+  document.getElementById("deliveryNote").parentElement.hidden=settings.fields.deliveryNote===false;
+  ["bkash","nagad","cod"].forEach(m=>{
+    const el=document.querySelector(`[data-method="${m}"]`);
+    el.hidden=settings.payments[m]?.enabled===false;
+  });
+  if(!settings.payments.bkash.enabled&&!settings.payments.nagad.enabled&&settings.payments.cod.enabled)selectedPayment="cod";
+  renderPayment();
+}
+function updateReview(){
+  ["fullName","mobile","area","district"].forEach(id=>document.getElementById(id).addEventListener("input",renderTotals));
+}
+document.querySelectorAll(".payment-option").forEach(el=>el.addEventListener("click",()=>selectPayment(el.dataset.method)));
+document.getElementById("applyCoupon").addEventListener("click",applyCoupon);
+document.getElementById("couponInput").addEventListener("keydown",e=>{if(e.key==="Enter")applyCoupon()});
+document.getElementById("copyNumber").addEventListener("click",async()=>{
+  const value=document.getElementById("paymentNumber").textContent;
+  try{await navigator.clipboard.writeText(value);document.getElementById("copyNumber").textContent="COPIED";}
+  catch(e){document.getElementById("copyNumber").textContent="SELECT NUMBER";}
+  setTimeout(()=>document.getElementById("copyNumber").textContent="COPY",1600);
+});
+document.getElementById("confirmOrder").addEventListener("click",placeOrder);
+document.getElementById("mobileConfirm").addEventListener("click",()=>{document.getElementById("confirmOrder").scrollIntoView({behavior:"smooth",block:"center"});document.getElementById("confirmOrder").focus();});
+document.getElementById("logoutBtn").addEventListener("click",async()=>{if(window.auth&&window.signOut){try{await window.signOut(window.auth)}catch(e){console.error(e)}}});
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+document.getElementById("year").textContent=new Date().getFullYear();
+applySettings();renderCart();setupAccount();updateReview();
+</script>
+</body>
+</html>
